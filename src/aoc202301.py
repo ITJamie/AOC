@@ -25,6 +25,9 @@ def part1(puzzle_input):
         print(calculated_num)
     print(f"total: {sum(output)}")
 
+def part2(puzzle_input):
+    print("do stuff")
+
 
 if __name__ == "__main__":
     for path in sys.argv[1:]:
