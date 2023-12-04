@@ -17,8 +17,8 @@ def part1(puzzle_input):
     for line in puzzle_input:
         gameid = line.split("Game ")[1].split(":")[0]
         hands = line.split(":")[1].split(";")
-        print(gameid)
-        print(hands)
+        # print(gameid)
+        # print(hands)
         games[gameid] = {}
         # games[gameid]['hands'] = []
         games[gameid]["max_seen"] = {}
@@ -28,13 +28,13 @@ def part1(puzzle_input):
         for hand in hands:
             for cube in hand.split(","):
                 cube = cube.strip()
-                print(cube)
+                # print(cube)
                 cube_count = int(cube.split(" ")[0])
                 cube_colour = cube.split(" ")[1]
                 if cube_count > games[gameid]["max_seen"][cube_colour]:
                     games[gameid]["max_seen"][cube_colour] = cube_count
-            print("")
-        print(games[gameid])
+            # print("")
+        # print(games[gameid])
 
     overall_max = {}
     overall_max["red"] = 12
@@ -51,12 +51,43 @@ def part1(puzzle_input):
         if good_game:
             good_game_ids.append(int(gameid))
 
-    print(good_game_ids)
-    print(sum(good_game_ids))
+    # print(good_game_ids)
+    print(f"Part 1: {sum(good_game_ids)}")
 
 
 def part2(puzzle_input):
-    output = []
+    games = {}
+    totals = []
+
+    # Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+    for line in puzzle_input:
+        gameid = line.split("Game ")[1].split(":")[0]
+        hands = line.split(":")[1].split(";")
+        # print(gameid)
+        # print(hands)
+        games[gameid] = {}
+        # games[gameid]['hands'] = []
+        games[gameid]["max_seen"] = {}
+        games[gameid]["max_seen"]["red"] = 0
+        games[gameid]["max_seen"]["green"] = 0
+        games[gameid]["max_seen"]["blue"] = 0
+        for hand in hands:
+            for cube in hand.split(","):
+                cube = cube.strip()
+                # print(cube)
+                cube_count = int(cube.split(" ")[0])
+                cube_colour = cube.split(" ")[1]
+                if cube_count > games[gameid]["max_seen"][cube_colour]:
+                    games[gameid]["max_seen"][cube_colour] = cube_count
+            # print("")
+
+        games[gameid]["total"] = (
+            games[gameid]["max_seen"]["red"] * games[gameid]["max_seen"]["green"] * games[gameid]["max_seen"]["blue"]
+        )
+        totals.append(games[gameid]["total"])
+        # print(games[gameid])
+
+    print(f"Part 2: {sum(totals)}")
 
 
 if __name__ == "__main__":
